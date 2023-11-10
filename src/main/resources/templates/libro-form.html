@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<title>LIBRO</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="m-4 position relative">
+			<div class="position-absolute top-50 start-50 translate-middle">
+				<h2 class="text-center">LIBRO</h2>
+
+				<!-- Se utiliza el mismo formulario para añadir o modificar libros -->
+				<form th:action="${libro.id != null ? '/libro/editar' : '/libro'}" th:object="${libro}" method="post">
+					<input type="hidden" name="id" th:value="${libro.id}" />
+					
+					<div class="mb-3">
+						<label class="form-label">TITULO</label>
+						<input type="text" name="titulo" class="form-control" th:value="${libro.titulo}" />
+						<!-- Muestra errores de validación para el campo "titulo" -->
+						<span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"
+							class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">AUTOR</label>
+						<input type="text" name="autor" class="form-control" th:value="${libro.autor}" />
+						<!-- Muestra errores de validación para el campo "autor" -->
+						<span th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"
+							class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">ISBN</label>
+						<input type="text" name="isbn" class="form-control" th:value="${libro.isbn}" />
+						<!-- Muestra errores de validación para el campo "isbn" -->
+						<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
+							class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">AÑO DE PUBLICACIÓN</label>
+						<input type="number" name="publicadoEn" class="form-control" th:value="${libro.publicadoEn}" />
+						<!-- Muestra errores de validación para el campo "publicadoEn" -->
+						<span th:if="${#fields.hasErrors('publicadoEn')}" th:errors="*{publicadoEn}"
+							class="text-danger"></span>
+					</div>
+					<div class="text-center">
+						<input type="submit" class="btn btn-outline-dark"
+							th:value="${libro.id != null ? 'Actualizar' : 'Añadir'}">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
